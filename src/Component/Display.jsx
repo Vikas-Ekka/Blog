@@ -10,6 +10,7 @@ export class Display extends Component {
     <div>
         <div>{posts[id].title}</div> 
         <div>{posts[id].caption}</div>
+        <button>add comment</button>
         </div>
     );
   }
