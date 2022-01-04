@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap';
 import shortid from 'shortid';
-import Display from './Display';
+
 
 class View extends React.Component {
     state = {
@@ -60,7 +60,7 @@ class View extends React.Component {
 
     renderTitle = () => {
       return(
-        Object.values(this.state.posts).map((post)=>(
+        Object.values(this.state.posts||{}).map((post)=>(
           <div onClick={()=>this.displayPost(post.id)}>{post.title}</div>
         ))
       )
