@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 export class Display extends Component {
   state = {
     comment : '' ,
-    comments : [] ,
     selectedCommentIndex : null,
   }
 
@@ -86,7 +85,6 @@ export class Display extends Component {
   render() {
     return (
       <div>
-         <div>{this.props.match.params.id}</div>
          {this.dispalyTitle()}
          <textarea 
          value={this.state.comment} 

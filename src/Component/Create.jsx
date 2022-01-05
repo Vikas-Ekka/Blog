@@ -8,7 +8,7 @@ class View extends React.Component {
         showModal : false,
         title : '',
         caption : '' ,
-        id : [] ,
+        id : '' ,
         posts : {} ,
     }
 
@@ -62,10 +62,22 @@ class View extends React.Component {
     }
 
 
+    handleDelete = id => {
+      let posts = this.state.posts  
+        delete posts[id]
+        this.setState({posts},()=>{
+          localStorage.setItem('posts',JSON.stringify(this.state.posts))
+        })
+    }
+
+
     renderTitle = () => {
       return(
-        Object.values(this.state.posts||{}).map((post)=>(
+        Object.values(this.state.posts||{}).map((post,index)=>(
+        <div>
           <div className='m-3 border border-primary w-25' onClick={()=>this.displayPost(post.id)}>{post.title}</div>
+          <button onClick={()=>this.handleDelete(post.id)}>Delete</button>
+          </div>
         ))
       )
     }
@@ -113,9 +125,9 @@ class View extends React.Component {
     render() { 
         return <div>
             {this.renderModal()}
+            {this.renderTitle()}
             <button className='btn-primary'
             onClick={()=>this.setState({showModal: true})}>add</button>
-            {this.renderTitle()}
         </div>;
     }
 }
