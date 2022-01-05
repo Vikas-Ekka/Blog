@@ -82,6 +82,11 @@ export class Display extends Component {
   }
 
 
+  handleBack = () => {
+    this.props.history.goBack()
+  }
+
+
   render() {
     return (
       <div>
@@ -92,6 +97,7 @@ export class Display extends Component {
          onChange={(event)=>this.handleChangeComment(event)}></textarea>
         <button onClick={()=>this.handleSaveComments()}>comment</button>
        {this.displayComments()}
+       <button onClick={()=>this.handleBack()}>Back</button>
       </div>
     )
   }
