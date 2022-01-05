@@ -75,8 +75,8 @@ export class Display extends Component {
     return ( 
     <div>
         <div>{posts[id].title}</div> 
+        <img src={posts[id].image} height='200' width ='200' />
         <div>{posts[id].caption}</div>
-        
         </div>
     );
   }

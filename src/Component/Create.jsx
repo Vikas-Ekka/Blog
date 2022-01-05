@@ -8,7 +8,7 @@ class View extends React.Component {
         showModal : false,
         title : '',
         caption : '' ,
-        id : '' ,
+        image : '' ,
         posts : {} ,
     }
 
@@ -34,6 +34,13 @@ class View extends React.Component {
     }
 
 
+    handleImage = (e) => {
+      let image = {...this.state.image}
+      image = e.target.value ;
+      this.setState({image})  
+    }
+
+
     handleSave = () => {
      
         let id = shortid.generate()
@@ -42,7 +49,7 @@ class View extends React.Component {
         let data = {...this.state.posts,
           [id] : {
             title : this.state.title ,
-            image : '' ,
+            image : this.state.image ,
             id ,
             caption: this.state.caption,
             comments : [],
@@ -99,9 +106,8 @@ class View extends React.Component {
          <br/>
          <br/>
 
-         Add image :
-         <input type='text'/>
-         <button>Browse</button>
+         Add image url :
+         <input type='text' value={this.state.image} onChange={(event)=>this.handleImage(event)} />
          <br/>
          <br/>
 
