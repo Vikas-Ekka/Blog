@@ -9,9 +9,9 @@ export class Display extends Component {
 
 
   componentDidMount() {
-    let temp = localStorage.getItem('comments')
-    let comments = JSON.parse(temp)
-    this.setState({comments})
+    let temp = localStorage.getItem('posts')
+    let posts = JSON.parse(temp)
+    this.setState({posts})
   }
 
 
@@ -22,22 +22,31 @@ export class Display extends Component {
 
 
   handleSaveComments = () => {
-    let comments = [...this.state.comments]
+    let posts = {...this.state.posts}
+    let id = this.props.match.params.id
+    let temp = [...posts[id].comments]
     if (this.state.selectedCommentIndex===null) {
-    comments.push(this.state.comment)
-    this.setState({comments,comment : ''})
+    temp.push(this.state.comment)
+    posts[id].comments = temp
+    this.setState({posts,comment : ''},()=>{
+      localStorage.setItem('posts',JSON.stringify(this.state.posts))
+    })
     } else { 
-      comments[this.state.selectedCommentIndex] = this.state.comment
-      this.setState({comments,comment : ''})
+      posts[id].comments[this.state.selectedCommentIndex] = this.state.comment
+      this.setState({posts,comment : ''},()=>{
+        localStorage.setItem('posts',JSON.stringify(this.state.posts))
+      })
     }
-    localStorage.setItem('comments',JSON.stringify(this.state.comments))
+    
     }
 
 
   displayComments = () => {
-    let comments = [...this.state.comments]
+    let posts = {...this.state.posts}
+    let id = this.props.match.params.id
+    let temp = posts[id]?.comments||[]
     return (
-    comments.map((comment,index)=>(
+    temp.map((comment,index)=>(
       <div>
       <div>{comment}</div>
       <button onClick={()=>this.handleDeleteComment(index)}>Delete</button>
@@ -49,9 +58,14 @@ export class Display extends Component {
 
 
   handleDeleteComment = (index) => {
-    let comments = [...this.state.comments]
-    comments = comments.filter(comment=>comment!==comments[index])
-    this.setState({comments})
+    let posts = {...this.state.posts}
+    let id = this.props.match.params.id
+    let temp = [...posts[id].comments]
+    temp = temp.filter(comment=>comment!==temp[index])
+    posts[id].comments = temp
+    this.setState({posts},()=>{
+      localStorage.setItem('posts',JSON.stringify(this.state.posts))
+    })
   }
 
 
@@ -79,7 +93,7 @@ export class Display extends Component {
          cols="70" rows="4"
          onChange={(event)=>this.handleChangeComment(event)}></textarea>
         <button onClick={()=>this.handleSaveComments()}>comment</button>
-        {this.displayComments()}
+       {this.displayComments()}
       </div>
     )
   }

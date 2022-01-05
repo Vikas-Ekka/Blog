@@ -65,7 +65,7 @@ class View extends React.Component {
     renderTitle = () => {
       return(
         Object.values(this.state.posts||{}).map((post)=>(
-          <div onClick={()=>this.displayPost(post.id)}>{post.title}</div>
+          <div className='m-3 border border-primary w-25' onClick={()=>this.displayPost(post.id)}>{post.title}</div>
         ))
       )
     }
