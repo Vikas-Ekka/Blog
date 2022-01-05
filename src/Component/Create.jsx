@@ -12,11 +12,13 @@ class View extends React.Component {
         posts : {} ,
     }
 
+
     componentDidMount() {
       let temp = localStorage.getItem('posts')
       let posts = JSON.parse(temp)
       this.setState({posts})
     }
+
 
     handleChangeName = (e) => {
       let title = {...this.state.title}
@@ -45,8 +47,10 @@ class View extends React.Component {
             caption: this.state.caption,
             comments : [],
           }}
-          this.setState({posts : data ,showModal: false,id : temp})
-      localStorage.setItem('posts',JSON.stringify(this.state.posts))
+          this.setState({posts : data ,showModal: false,id : temp},()=>{
+            localStorage.setItem('posts',JSON.stringify(this.state.posts))
+
+          })
       
     }
 

@@ -3,8 +3,15 @@ import React, { Component } from 'react'
 export class Display extends Component {
   state = {
     comment : '' ,
-    comments :  [] ,
+    comments : [] ,
     selectedCommentIndex : null,
+  }
+
+
+  componentDidMount() {
+    let temp = localStorage.getItem('comments')
+    let comments = JSON.parse(temp)
+    this.setState({comments})
   }
 
 
@@ -15,12 +22,16 @@ export class Display extends Component {
 
 
   handleSaveComments = () => {
-    if (!this.state.selectedCommentIndex) {
     let comments = [...this.state.comments]
+    if (this.state.selectedCommentIndex===null) {
     comments.push(this.state.comment)
-    this.setState({comments,comment : null})
-    } else this.editComments()
-  }
+    this.setState({comments,comment : ''})
+    } else { 
+      comments[this.state.selectedCommentIndex] = this.state.comment
+      this.setState({comments,comment : ''})
+    }
+    localStorage.setItem('comments',JSON.stringify(this.state.comments))
+    }
 
 
   displayComments = () => {
@@ -29,18 +40,17 @@ export class Display extends Component {
     comments.map((comment,index)=>(
       <div>
       <div>{comment}</div>
-      <button>Delete</button>
-      <button onClick={()=>{this.handleSaveComments(index)
-      this.setState({comment,selectedCommentIndex : index})}}>Edit</button>
+      <button onClick={()=>this.handleDeleteComment(index)}>Delete</button>
+      <button onClick={()=>{this.setState({comment,selectedCommentIndex : index})}}>Edit</button>
       </div>
     ))
     );
   }
 
 
-  editComments = () => {
+  handleDeleteComment = (index) => {
     let comments = [...this.state.comments]
-    comments[this.state.selectedCommentIndex] = this.state.comment
+    comments = comments.filter(comment=>comment!==comments[index])
     this.setState({comments})
   }
 
@@ -49,8 +59,7 @@ export class Display extends Component {
     let temp = localStorage.getItem('posts')
     let posts = JSON.parse(temp)
     let id = this.props.match.params.id
-    return (
-   
+    return ( 
     <div>
         <div>{posts[id].title}</div> 
         <div>{posts[id].caption}</div>
@@ -58,6 +67,7 @@ export class Display extends Component {
         </div>
     );
   }
+
 
   render() {
     return (
