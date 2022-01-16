@@ -43,16 +43,3 @@
     border-radius: 5px;
     font-size: 25px;
 }
-    /* transition: 1s;
-    opac ity: 0;
-    right: -20px;
-}
-
-.addpost:hover span{
-    padding-right: 25px;
-}
-
-.addpost:hover span::after{
-    opacity: 1;
-    right: 0;
-} */
