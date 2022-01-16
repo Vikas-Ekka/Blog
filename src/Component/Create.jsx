@@ -1,6 +1,7 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap';
 import shortid from 'shortid';
+import './Create.css'
 
 
 class View extends React.Component {
@@ -70,7 +71,7 @@ class View extends React.Component {
 
 
     handleDelete = id => {
-      let posts = this.state.posts  
+      let posts = {...this.state.posts}  
         delete posts[id]
         this.setState({posts},()=>{
           localStorage.setItem('posts',JSON.stringify(this.state.posts))
@@ -82,8 +83,9 @@ class View extends React.Component {
       return(
         Object.values(this.state.posts||{}).map((post,index)=>(
         <div>
-          <div className='m-3 border border-primary w-25' onClick={()=>this.displayPost(post.id)}>{post.title}</div>
-          <button onClick={()=>this.handleDelete(post.id)}>Delete</button>
+          <div className='Title'
+           onClick={()=>this.displayPost(post.id)}>{post.title}</div>
+          <button className='deletePost' onClick={()=>this.handleDelete(post.id)}>Delete</button>
           </div>
         ))
       )
@@ -129,11 +131,11 @@ class View extends React.Component {
 
 
     render() { 
-        return <div>
+        return <div className='home'>
             {this.renderModal()}
             {this.renderTitle()}
-            <button className='btn-primary'
-            onClick={()=>this.setState({showModal: true})}>add</button>
+            <button className='addpost'
+            onClick={()=>this.setState({showModal: true})}>Add Post</button>
         </div>;
     }
 }

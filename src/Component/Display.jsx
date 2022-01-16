@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Display.css'
 
 export class Display extends Component {
   state = {
@@ -48,8 +49,8 @@ export class Display extends Component {
     temp.map((comment,index)=>(
       <div>
       <div>{comment}</div>
-      <button onClick={()=>this.handleDeleteComment(index)}>Delete</button>
-      <button onClick={()=>{this.setState({comment,selectedCommentIndex : index})}}>Edit</button>
+      <button className='deletebutton' onClick={()=>this.handleDeleteComment(index)}>Delete</button>
+      <button className='editbutton' onClick={()=>{this.setState({comment,selectedCommentIndex : index})}}>Edit</button>
       </div>
     ))
     );
@@ -73,10 +74,10 @@ export class Display extends Component {
     let posts = JSON.parse(temp)
     let id = this.props.match.params.id
     return ( 
-    <div>
-        <div>{posts[id].title}</div> 
-        <img src={posts[id].image} height='200' width ='200' />
-        <div>{posts[id].caption}</div>
+    <div className='display'>
+        <div className='posttitle'>{posts[id].title}</div> 
+        <img className='image' src={posts[id].image} height='400' width ='800' />
+        <div className='caption' >{posts[id].caption}</div>
         </div>
     );
   }
@@ -89,7 +90,7 @@ export class Display extends Component {
 
   render() {
     return (
-      <div>
+      <div className='comment'>
          {this.dispalyTitle()}
          <textarea 
          value={this.state.comment} 
@@ -97,7 +98,7 @@ export class Display extends Component {
          onChange={(event)=>this.handleChangeComment(event)}></textarea>
         <button onClick={()=>this.handleSaveComments()}>comment</button>
        {this.displayComments()}
-       <button onClick={()=>this.handleBack()}>Back</button>
+       <button className='backbutton' onClick={()=>this.handleBack()}>Back</button>
       </div>
     )
   }

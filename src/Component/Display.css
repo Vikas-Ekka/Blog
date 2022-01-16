@@ -1,0 +1,35 @@
+*{
+    margin: 0px;
+   
+}
+
+.display{
+    background-color: rgb(226, 242, 248);
+}
+
+.posttitle{
+    background-color: darkblue;
+    color: white;
+    font-style: bold;
+    font-size: 35px;
+}
+
+.caption{
+    font-size: 28px;
+    font-family: "Times New Roman", Times, serif;
+    color: darkblue;
+}
+
+.comment{
+    background-color: rgb(226, 242, 248);
+    color: darkblue;
+
+}
+
+.deletebutton{
+    background-color: red;
+}
+
+.editbutton{
+    background-color: blue;
+}

@@ -1,0 +1,58 @@
+*{
+    margin: 0px;
+    font-family: 'Lato', sans-serif;
+}
+
+
+.home{
+    border: black;
+    border-radius: 2px;
+    text-align: center;
+    padding: 20px;
+}
+
+.Title {
+    display: inline-block;
+    /* background-color: rgb(1, 12, 3); */
+    border-bottom: rgb(248, 248, 248);
+    text-align: center;
+    height: 50px;
+    width: 800px;
+    padding: 30px;
+    font-size: 30px;
+    color: rgb(1, 1, 14);
+    border-radius: 10px;
+    border: 2px solid rgb(0, 1, 12);
+    align-items: center;
+    line-height: 0;
+}
+
+
+.deletePost{
+    display: inline;
+    background-color: rgb(19, 17, 17);
+    margin: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.addpost{
+    background-color: rgb(19, 17, 17);
+    margin: 20px;
+    color: white;
+    border-radius: 5px;
+    font-size: 25px;
+}
+    /* transition: 1s;
+    opac ity: 0;
+    right: -20px;
+}
+
+.addpost:hover span{
+    padding-right: 25px;
+}
+
+.addpost:hover span::after{
+    opacity: 1;
+    right: 0;
+} */
