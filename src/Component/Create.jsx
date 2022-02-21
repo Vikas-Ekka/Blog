@@ -2,6 +2,7 @@ import React from 'react';
 import {Modal} from 'react-bootstrap';
 import shortid from 'shortid';
 import './Create.css'
+import axios from 'axios';
 
 
 class View extends React.Component {
@@ -13,8 +14,19 @@ class View extends React.Component {
         posts : {} ,
     }
 
+    trial = () => {
+      axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then(response=>{
+        console.log(response)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    }
+
 
     componentDidMount() {
+     
       let temp = localStorage.getItem('posts')
       let posts = JSON.parse(temp)
       this.setState({posts})
@@ -136,6 +148,7 @@ class View extends React.Component {
             {this.renderTitle()}
             <button className='addpost'
             onClick={()=>this.setState({showModal: true})}>Add Post</button>
+            <button onClick={()=>this.trial()}>api</button>
         </div>;
     }
 }
